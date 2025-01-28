@@ -20,6 +20,18 @@
         <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
         <li><a href=/filmout/films>Pelis</a></li>
     </ul>
+
+    <!-- Create Film Form -->
+    <form method="POST">
+        <h2> Añadir Pelicula </h2>
+        Nombre <input> <br>
+        Año <input> <br>
+        Genero <input> <br>
+        Pais <input> <br>
+        Duración <input> <br>
+        Imagen URL <input> <br>
+        <input type = "submit" value = "Enviar">
+    </form>
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

@@ -30,5 +30,10 @@ Route::middleware('year')->group(function() {
         Route::get('films/{year?}/{genre?}',[FilmController::class, "listFilms"])->name('listFilms');
     });
 });
+Route::middleware('URL')->group(function(){
+    Route::group(['prefix'=>'filmin'], function(){
+        Route::get('createFilm', [FilmController::class, "createFilm"])->name('createFilm');
+    });
+});
 
 

@@ -124,4 +124,8 @@ class FilmController extends Controller
         $title = "Pelis ordenadas por fecha";
         $films = FilmController::readFilms();
     }
+
+    public function createFilm(){
+        
+    }
 }
