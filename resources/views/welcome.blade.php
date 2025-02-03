@@ -22,10 +22,10 @@
     </ul>
 
     <!-- Create Film Form -->
-    <form method="POST">
+    <form method="POST" action ="/filmin/createFilm">
         <h2> Añadir Pelicula </h2>
-        Nombre <input> <br>
-        Año <input> <br>
+        Nombre <input name = "name"> <br>
+        Año <input name = "year"> <br>
         Genero <input> <br>
         Pais <input> <br>
         Duración <input> <br>

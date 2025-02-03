@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class FilmController extends Controller
 {
@@ -125,7 +126,15 @@ class FilmController extends Controller
         $films = FilmController::readFilms();
     }
 
-    public function createFilm(){
-        
+
+    public function isFilm(){
+
+    }
+
+    public function createFilm(Request $request){
+        $films = FilmController::readFilms();
+        $title = "Listado de pelis";
+        $title = $request->input("name");
+        return view('films.list', ["films" => $films, "title" => $title]);
     }
 }
