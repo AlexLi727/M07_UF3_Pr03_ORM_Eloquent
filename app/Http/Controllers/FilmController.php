@@ -133,8 +133,11 @@ class FilmController extends Controller
 
     public function createFilm(Request $request){
         $films = FilmController::readFilms();
-        $title = "Listado de pelis";
         $title = $request->input("name");
+        $json = Storage::json('/public/films.json');
+        $json += ["name"=>"Manolo"];
+        json_encode($json);
+        file_put_contents('..\storage\app\public\films.json', json_encode($json));
         return view('films.list', ["films" => $films, "title" => $title]);
     }
 }

@@ -23,13 +23,14 @@
 
     <!-- Create Film Form -->
     <form method="POST" action ="/filmin/createFilm">
+        @csrf
         <h2> Añadir Pelicula </h2>
         Nombre <input name = "name"> <br>
         Año <input name = "year"> <br>
-        Genero <input> <br>
-        Pais <input> <br>
-        Duración <input> <br>
-        Imagen URL <input> <br>
+        Genero <input name = "genre"> <br>
+        Pais <input name = "country"> <br>
+        Duración <input name = "duration"> <br>
+        Imagen URL <input name = "img"> <br>
         <input type = "submit" value = "Enviar">
     </form>
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
