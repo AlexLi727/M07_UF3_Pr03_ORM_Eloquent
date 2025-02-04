@@ -10,10 +10,10 @@ use function PHPUnit\Framework\isNull;
 class validateURL{
 
     public function handle(Request $request, Closure $closure){
-        $url = $request->input('URL');
+        $url = $request->route('img');
 
         if(isset($url)){
-            if(isNull($url)){
+            if(isNull($url) || $url === "hola"){
                 return redirect('/');
             }
         }

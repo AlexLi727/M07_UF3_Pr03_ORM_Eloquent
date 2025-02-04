@@ -127,17 +127,33 @@ class FilmController extends Controller
     }
 
 
-    public function isFilm(){
-
+    public function isFilm(String $name = null){
+        $films = FilmController::readFilms();
+        foreach($films as $film){
+            if(strtolower($film["name"]) == strtolower($name)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public function createFilm(Request $request){
-        $films = FilmController::readFilms();
-        $title = $request->input("name");
+        $name = $request->input("name");
+        if(FilmController::isFilm($name)){
+            return redirect("/");
+        }
+        $year = $request->input("year");
+        $genre = $request->input("genre");
+        $country = $request->input("country");
+        $duration = $request->input("duration");
+        $img_url = $request->input("img");
+
         $json = Storage::json('/public/films.json');
-        $json += ["name"=>"Manolo"];
+        
+        $json += ["name"=> $name, "year"=> $year, "genre"=> $genre, "country"=> $country, "duration" => $duration, "img_url" => $img_url];
         json_encode($json);
         file_put_contents('..\storage\app\public\films.json', json_encode($json));
-        return view('films.list', ["films" => $films, "title" => $title]);
+        $films = FilmController::readFilms();
+        return view('films.list', ["films" => $films, "title" => "Hola"]);
     }
 }
