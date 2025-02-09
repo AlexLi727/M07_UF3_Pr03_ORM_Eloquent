@@ -10,14 +10,12 @@ use function PHPUnit\Framework\isNull;
 class validateURL{
 
     public function handle(Request $request, Closure $closure){
-        $url = $request->route('img');
+        $url = $request->input('img');
 
-        if(isset($url)){
-            if(isNull($url) || $url === "hola"){
-                return redirect('/');
+            if(filter_var($url, FILTER_VALIDATE_URL)){
+                return $closure($request);
             }
-        }
-        return $closure($request);
+        return response(view('welcome', ["status"=> "URL de imagen no valida"]));
     }
 }
 ?>
