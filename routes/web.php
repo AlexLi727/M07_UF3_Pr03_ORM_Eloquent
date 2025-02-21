@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FilmController;
 use App\Http\Middleware\ValidateYear;
+use Database\Seeders\filmSeeder;
 use Illuminate\Support\Facades\Route;
 
 /*
