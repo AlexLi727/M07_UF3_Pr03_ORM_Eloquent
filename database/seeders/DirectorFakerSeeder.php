@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory;
 use Illuminate\Support\Facades\DB;
-require_once 'vendor/autoload.php';
-class FilmFakerSeeder extends Seeder
+
+class DirectorFakerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,15 +17,13 @@ class FilmFakerSeeder extends Seeder
         $faker = Factory::create();
 
         for($i = 1; $i < 10; $i++){
-            DB::table("films")->insert(
-                [
+            DB::table("directors")->insert(
+         [
                     "id" => $i,
-                    "name" => $faker->word(),
-                    "year" => $faker->year(),
-                    "genre" => $faker->word(),
+                    "name" => $faker->name(),
+                    "surname" => $faker->lastName(),
+                    "birthdate" => $faker->dateTime(),
                     "country" => $faker->country(),
-                    "duration" => rand(60, 240),
-                    "director_id" => $faker->randomDigitNotZero(),
                     "img_url" => $faker->imageUrl(),
                     "created_at" => now(),
                     "updated_at" => now()
