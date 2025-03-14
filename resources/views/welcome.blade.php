@@ -44,6 +44,13 @@
         Imagen URL <input name = "img"> <br>
         <input type = "submit" value = "Enviar">
     </form>
+
+    <!-- Actors section -->
+    <h1> Lista de actores </h1>
+    <ul>
+        <li><a href=/actorout/countActors> Contar Actores </a></li>
+        <li><a href=/actorout/listActors> Lista de Actores </a></li>
+    </ul>
     @endsection
 
     @section('footer')
