@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class FilmController extends Controller
 {
@@ -120,12 +121,22 @@ class FilmController extends Controller
     }
 
     public function sortFilms(){
-        $films_sorte = [];
-
-        $title = "Pelis ordenadas por fecha";
         $films = FilmController::readFilms();
+        $title = "Pelis ordenadas por fecha";
+        $sortedFilms = asort($films);
+
+        return view('films.list',["films" => $sortedFilms, "title" => $title]);
+        
     }
 
+    public function countFilms(){
+        $films = FilmController::readFilms();
+        $filmCount = 0;
+        foreach($films as $film){
+            $filmCount++;
+        }
+        return view('films.count',["contador"=>$filmCount]);
+    }
 
     public function isFilm(String $name = null){
         $films = FilmController::readFilms();
@@ -140,7 +151,7 @@ class FilmController extends Controller
     public function createFilm(Request $request){
         $name = $request->input("name");
         if(FilmController::isFilm($name)){
-            return redirect("/");
+            return view('welcome',["status" => "La película ya existe"]);
         }
         $year = $request->input("year");
         $genre = $request->input("genre");
@@ -150,10 +161,11 @@ class FilmController extends Controller
 
         $json = Storage::json('/public/films.json');
         
-        $json += ["name"=> $name, "year"=> $year, "genre"=> $genre, "country"=> $country, "duration" => $duration, "img_url" => $img_url];
-        json_encode($json);
-        file_put_contents('..\storage\app\public\films.json', json_encode($json));
-        $films = FilmController::readFilms();
-        return view('films.list', ["films" => $films, "title" => "Hola"]);
+        $newFilm = ["name"=> $name, "year"=> $year, "genre"=> $genre, "country"=> $country, "duration" => $duration, "img_url" => $img_url];
+
+        $json[] = $newFilm;
+        Storage::put('/public/films.json', json_encode($json));
+        
+        return redirect()->action('App\Http\Controllers\FilmController@listFilms');
     }
 }

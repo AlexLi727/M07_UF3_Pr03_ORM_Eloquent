@@ -13,12 +13,23 @@
 </head>
 
 <body class="container">
+    @extends('layouts.master')
+    @section('header')
+        @parent
+    @endsection
 
+    @section('content')
+    @if(!empty($status))
+        <h1> {{$status}} </h1>
+    @endif
+    
     <h1 class="mt-4">Lista de Peliculas</h1>
     <ul>
         <li><a href=/filmout/oldFilms>Pelis antiguas</a></li>
         <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
         <li><a href=/filmout/films>Pelis</a></li>
+        <li><a href=/filmout/sortFilms> Ordenar Pelis</a></li>
+        <li><a href=/filmout/countFilms> Contador Pelis </a></li>
     </ul>
 
     <!-- Create Film Form -->
@@ -33,6 +44,11 @@
         Imagen URL <input name = "img"> <br>
         <input type = "submit" value = "Enviar">
     </form>
+    @endsection
+
+    @section('footer')
+    @parent()
+    @endsection
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
