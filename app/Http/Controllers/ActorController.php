@@ -30,4 +30,23 @@ class ActorController extends Controller
         
         return view("actors.list", ["actors" => $actors]);
     }
+
+    public function listActorsByDecade(Request $request){
+        $decade = $request->input("decade");
+       
+        if(is_null($decade))
+            return view();
+
+        $actors = json_decode(ActorController::readActors(), true);
+        $filtredActors = [];
+
+        foreach($actors as $actor){
+            $birthdate = substr($actor["birthdate"], 0, -6);
+            if($birthdate >= $decade && $birthdate < $decade + 10){
+                $filtredActors[] = $actor;
+            }
+        }
+        return view("actors.list", ["actors" => $filtredActors]);
+
+    }
 }
