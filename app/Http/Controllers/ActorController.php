@@ -49,4 +49,16 @@ class ActorController extends Controller
         return view("actors.list", ["actors" => $filtredActors]);
 
     }
+
+    public function destroy($id = null){
+        db::table('actors')->where("id", $id)->delete();
+        return response()->json([
+            "action" => "delete",
+            "status" => true
+        ]);
+    }
+
+    public function update(){
+        
+    }
 }
