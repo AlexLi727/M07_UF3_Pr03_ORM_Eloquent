@@ -44,6 +44,26 @@
         Imagen URL <input name = "img"> <br>
         <input type = "submit" value = "Enviar">
     </form>
+
+    <!-- Actors section -->
+    <h1> Lista de actores </h1>
+    <ul>
+        <li><a href=/actorout/countActors> Contar Actores </a></li>
+        <li><a href=/actorout/listActors> Lista de Actores </a></li>
+    </ul>
+
+    <h1> Buscar actores por criterio </h1>
+    <form method="GET" action = "/actorout/listActorsByDecade">
+        Decada de nacimiento
+        <select name = "decade">
+            <option value = "1980"> 1980-1989 </option>
+            <option value = "1990"> 1990-1999 </option>
+            <option value = "2000"> 2000-2009 </option>
+            <option value = "2010"> 2010-2019 </option>
+            <option value = "2020"> 2020-2029 </option>
+        </select>
+        <input type = "submit" value = "Enviar">
+    </form>
     @endsection
 
     @section('footer')
