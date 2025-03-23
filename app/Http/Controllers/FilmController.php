@@ -182,6 +182,9 @@ class FilmController extends Controller
     }
 
     public function createFilm(Request $request){
+        $flag = config('api.FLAG');
+        
+        
         $name = $request->input("name");
         if(FilmController::isFilm($name)){
             return view('welcome',["status" => "La película ya existe"]);
@@ -192,15 +195,16 @@ class FilmController extends Controller
         $duration = $request->input("duration");
         $img_url = $request->input("img");
 
-        // $json = Storage::json('/public/films.json');
-        
-        // $newFilm = ["name"=> $name, "year"=> $year, "genre"=> $genre, "country"=> $country, "duration" => $duration, "img_url" => $img_url];
+        if($flag == "JSON"){
+            $json = Storage::json('/public/films.json');
+            
+            $newFilm = ["name"=> $name, "year"=> $year, "genre"=> $genre, "country"=> $country, "duration" => $duration, "img_url" => $img_url];
 
-        // $json[] = $newFilm;
-        // Storage::put('/public/films.json', json_encode($json));
+            $json[] = $newFilm;
+            Storage::put('/public/films.json', json_encode($json));
+        }
         
-        // return redirect()->action('App\Http\Controllers\FilmController@listFilms');
-
+        if($flag == "BBDD"){
         DB::table("films")->insert([
             "name" => $name,
             "year" => $year,
@@ -212,7 +216,7 @@ class FilmController extends Controller
             "created_at" => now(),
             "updated_at" => now()
         ]);
-
+    }
         return redirect()->action('App\Http\Controllers\FilmController@listFilms');
 
 
