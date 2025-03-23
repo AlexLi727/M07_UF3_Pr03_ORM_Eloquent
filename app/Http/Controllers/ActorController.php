@@ -51,6 +51,14 @@ class ActorController extends Controller
     }
 
     public function destroy($id = null){
+        $actor = DB::table('actors')->where('id', $id)->first();
+        if(!$actor){
+            return response()->json([
+                "action" => "delete",
+                "status" => false
+            ]);
+        }
+
         db::table('actors')->where("id", $id)->delete();
         return response()->json([
             "action" => "delete",
@@ -65,7 +73,15 @@ class ActorController extends Controller
         $country = $request->input("country");
         $img_url = $request->input("img_url");
 
-         DB::table("actors")->where("id", $id)->update([
+        $actor = DB::table('actors')->where('id', $id)->first();
+        if(!$actor){
+            return response()->json([
+                "action" => "update",
+                "status" => false
+            ]);
+        }
+
+        DB::table("actors")->where("id", $id)->update([
             "name" => $name,
             "surname" => $surname,
             "birthdate" => $birthdate,
