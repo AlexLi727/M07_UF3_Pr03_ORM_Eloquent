@@ -82,8 +82,6 @@ class FilmController extends Controller
             );
             array_push($films, $newFilm);
         }
-        // $films += $filmsDatabase;
-        // die(json_encode($films));
 
         //if year and genre are null
         if (is_null($year) && is_null($genre))
@@ -153,6 +151,19 @@ class FilmController extends Controller
     public function countFilms(){
         $films = FilmController::readFilms();
         $filmCount = 0;
+        $filmsDatabase = FilmController::readFilmsDatabase();
+        $filmsDatabase = json_decode($filmsDatabase, true);
+        foreach($filmsDatabase as $film){
+            $newFilm = array(
+                "name" => $film["name"],
+                "year" => $film["year"],
+                "genre" => $film["genre"],
+                "country" => $film["country"],
+                "duration" => $film["duration"],
+                "img_url" =>$film["img_url"]
+            );
+            array_push($films, $newFilm);
+        }
         foreach($films as $film){
             $filmCount++;
         }
