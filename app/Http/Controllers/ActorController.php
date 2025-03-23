@@ -58,7 +58,25 @@ class ActorController extends Controller
         ]);
     }
 
-    public function update(){
+    public function update(Request $request, $id = null){
+        $name = $request->input("name");
+        $surname = $request->input("surname");
+        $birthdate = $request->input("birthdate");
+        $country = $request->input("country");
+        $img_url = $request->input("img_url");
 
+         DB::table("actors")->where("id", $id)->update([
+            "name" => $name,
+            "surname" => $surname,
+            "birthdate" => $birthdate,
+            "country" => $country,
+            "img_url" => $img_url,
+            "updated_at" => now()
+         ]);
+
+         return response()->json([
+            "action" => "update",
+            "status" => true
+        ]);
     }
 }
