@@ -14,6 +14,19 @@ class FilmController extends Controller
      */
     public static function readFilms(): array {
         $films = Storage::json('/public/films.json');
+        $filmsDatabase = FilmController::readFilmsDatabase();
+        $filmsDatabase = json_decode($filmsDatabase, true);
+        foreach($filmsDatabase as $film){
+            $newFilm = array(
+                "name" => $film["name"],
+                "year" => $film["year"],
+                "genre" => $film["genre"],
+                "country" => $film["country"],
+                "duration" => $film["duration"],
+                "img_url" =>$film["img_url"]
+            );
+            array_push($films, $newFilm);
+        }
         return $films;
     }
 
@@ -69,19 +82,7 @@ class FilmController extends Controller
 
         $title = "Listado de todas las pelis";
         $films = FilmController::readFilms();
-        $filmsDatabase = FilmController::readFilmsDatabase();
-        $filmsDatabase = json_decode($filmsDatabase, true);
-        foreach($filmsDatabase as $film){
-            $newFilm = array(
-                "name" => $film["name"],
-                "year" => $film["year"],
-                "genre" => $film["genre"],
-                "country" => $film["country"],
-                "duration" => $film["duration"],
-                "img_url" =>$film["img_url"]
-            );
-            array_push($films, $newFilm);
-        }
+        
 
         //if year and genre are null
         if (is_null($year) && is_null($genre))
