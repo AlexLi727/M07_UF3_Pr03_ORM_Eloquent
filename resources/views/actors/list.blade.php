@@ -4,7 +4,7 @@
     @endsection
 
 @section("content")
-<h1> Lista de actores </h1>
+<h1> {{ $title }} </h1>
 
 @if(empty($actors))
     <FONT COLOR="red">No se ha encontrado ningun actor</FONT>

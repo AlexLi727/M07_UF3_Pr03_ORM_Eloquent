@@ -28,12 +28,12 @@ class ActorController extends Controller
     public function listActors(){
         $actors = json_decode(ActorController::readActors(), true);
         
-        return view("actors.list", ["actors" => $actors]);
+        return view("actors.list", ["actors" => $actors, "title" => "Lista de actores"]);
     }
 
     public function listActorsByDecade(Request $request){
         $decade = $request->input("decade");
-       
+        
         if(is_null($decade))
             return view();
 
@@ -46,7 +46,7 @@ class ActorController extends Controller
                 $filtredActors[] = $actor;
             }
         }
-        return view("actors.list", ["actors" => $filtredActors]);
+        return view("actors.list", ["actors" => $filtredActors, "title" => "Lista de actores por decada ($decade - ".($decade + 9).")"]);
 
     }
 
@@ -59,6 +59,6 @@ class ActorController extends Controller
     }
 
     public function update(){
-        
+
     }
 }
