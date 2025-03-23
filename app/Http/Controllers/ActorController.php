@@ -51,6 +51,14 @@ class ActorController extends Controller
     }
 
     public function destroy($id = null){
+        $actor = DB::table('actors')->where('id', $id)->first();
+        if(!$actor){
+            return response()->json([
+                "action" => "delete",
+                "status" => false
+            ]);
+        }
+
         db::table('actors')->where("id", $id)->delete();
         return response()->json([
             "action" => "delete",
@@ -58,7 +66,33 @@ class ActorController extends Controller
         ]);
     }
 
-    public function update(){
+    public function update(Request $request, $id = null){
+        $name = $request->input("name");
+        $surname = $request->input("surname");
+        $birthdate = $request->input("birthdate");
+        $country = $request->input("country");
+        $img_url = $request->input("img_url");
 
+        $actor = DB::table('actors')->where('id', $id)->first();
+        if(!$actor || is_null($name) || is_null($surname) || is_null($birthdate) || is_null($country)){
+            return response()->json([
+                "action" => "update",
+                "status" => false
+            ]);
+        }
+
+        DB::table("actors")->where("id", $id)->update([
+            "name" => $name,
+            "surname" => $surname,
+            "birthdate" => $birthdate,
+            "country" => $country,
+            "img_url" => $img_url,
+            "updated_at" => now()
+         ]);
+
+         return response()->json([
+            "action" => "update",
+            "status" => true
+        ]);
     }
 }

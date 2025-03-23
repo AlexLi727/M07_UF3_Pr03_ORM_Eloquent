@@ -21,6 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::delete('actors/{id}', [ActorController::class, "destroy"])->name("deleteActors");
+Route::put('actors/{id}', [ActorController::class, "update"])->name("updateActors");
 
 Route::middleware('year')->group(function() {
     Route::group(['prefix'=>'filmout'], function(){
