@@ -74,7 +74,7 @@ class ActorController extends Controller
         $img_url = $request->input("img_url");
 
         $actor = DB::table('actors')->where('id', $id)->first();
-        if(!$actor){
+        if(!$actor || is_null($name) || is_null($surname) || is_null($birthdate) || is_null($country)){
             return response()->json([
                 "action" => "update",
                 "status" => false
