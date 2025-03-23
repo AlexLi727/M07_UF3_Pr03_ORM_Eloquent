@@ -149,7 +149,7 @@ class FilmController extends Controller
     }
 
     public function countFilms(){
-        $films = FilmController::readFilms();
+        $films = [];
         $filmCount = 0;
         $filmsDatabase = FilmController::readFilmsDatabase();
         $filmsDatabase = json_decode($filmsDatabase, true);
