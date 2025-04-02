@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Film extends Model
+class Director extends Model
 {
     use HasFactory;
 
-    /**
+        /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -45,8 +45,4 @@ class Film extends Model
     ];
 
     public $timestamps = true;
-
-    public function director(){
-        return $this->belongsTo(Director::class, 'director_id');
-    }
 }
