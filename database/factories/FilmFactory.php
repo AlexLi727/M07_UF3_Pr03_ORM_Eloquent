@@ -11,7 +11,7 @@ use App\Models\Film;
 class FilmFactory extends Factory
 {
 
-    // protected $model = Film::class;
+    protected $model = Film::class;
 
     /**
      * Define the model's default state.

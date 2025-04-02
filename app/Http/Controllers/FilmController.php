@@ -5,11 +5,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
-use App\Models\Film;
 
 class FilmController extends Controller
 {
-    
 
     /**
      * Read films from storage
@@ -33,7 +31,7 @@ class FilmController extends Controller
     }
 
     public static function readFilmsDatabase(){
-        $films = Film::get();
+        $films = DB::table("films")->get();
         return $films;
     }
     /**

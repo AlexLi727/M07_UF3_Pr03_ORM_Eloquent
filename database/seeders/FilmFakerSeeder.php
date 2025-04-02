@@ -16,7 +16,7 @@ class FilmFakerSeeder extends Seeder
      */
     public function run(): void
     {
-        Film::factory()->count(1)->create();
+        Film::factory()->count(5)->create();
         // $faker = Factory::create();
 
         // for($i = 1; $i < 10; $i++){
