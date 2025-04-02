@@ -39,14 +39,9 @@ class Film extends Model
         'genre' => 'string',
         'country' => 'string',
         'duration' => 'integer',
-        'director_id' => 'integer',
         'img_url' => 'string'
         
     ];
 
     public $timestamps = true;
-
-    public function director(){
-        return $this->belongsTo(Director::class, 'director_id');
-    }
 }
