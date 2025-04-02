@@ -6,6 +6,8 @@ use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Film;
+
 require_once 'vendor/autoload.php';
 class FilmFakerSeeder extends Seeder
 {
@@ -14,23 +16,6 @@ class FilmFakerSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Factory::create();
-
-        for($i = 1; $i < 10; $i++){
-            DB::table("films")->insert(
-                [
-                    "id" => $i,
-                    "name" => $faker->word(),
-                    "year" => $faker->year(),
-                    "genre" => $faker->word(),
-                    "country" => $faker->country(),
-                    "duration" => rand(60, 240),
-                    "director_id" => $faker->randomDigitNotZero(),
-                    "img_url" => $faker->imageUrl(),
-                    "created_at" => now(),
-                    "updated_at" => now()
-                ]
-                );
-        }
+        $faker = Film::factory()->count(5)->create();
     }
 }
