@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory;
+use App\Models\Actor;
 
 class ActorFakerSeeder extends Seeder
 {
@@ -14,20 +15,6 @@ class ActorFakerSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Factory::create();
-
-        for($i = 0; $i < 10; $i++){
-            DB::table("actors")->insert(
-                [
-                    "name" => $faker->name(),
-                    "surname" => $faker->lastName(),
-                    "birthdate" => $faker->dateTime(),
-                    "country" => $faker->country(),
-                    "img_url" => $faker->imageUrl(),
-                    "created_at" => now(),
-                    "updated_at" => now()
-                ]
-                );
-        }
+        Actor::factory()->count(5)->create();
     }
 }
