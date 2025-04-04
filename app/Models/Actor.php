@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Film extends Model
+class Actor extends Model
 {
     use HasFactory;
 
-    /**
+     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'year', 'genre', 'country', 'duration', 'director_id', 'img_url'
+        'name', 'surname', 'birthdate', 'country', 'img_url'
     ];
 
     /**
@@ -35,12 +35,10 @@ class Film extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'year' => 'integer',
-        'genre' => 'string',
+        'surname' => 'string',
+        'birthdate' => 'datetime',
         'country' => 'string',
-        'duration' => 'integer',
         'img_url' => 'string'
-        
     ];
 
     public $timestamps = true;
