@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use App\Models\Film;
+use App\Models\Actor;
 
 class FilmController extends Controller
 {
@@ -168,7 +169,6 @@ class FilmController extends Controller
     public function createFilm(Request $request){
         $flag = config('api.FLAG');
         
-        
         $name = $request->input("name");
         if(FilmController::isFilm($name)){
             return view('welcome',["status" => "La película ya existe"]);
@@ -202,7 +202,16 @@ class FilmController extends Controller
             ]);
     }
         return redirect()->action('App\Http\Controllers\FilmController@listFilms');
+    }
 
+    public function indexFilms(){
+        // $films = FilmController::readFilmsDatabase(); 
+        $films = Actor::find(6);
+        $actors = $films->actors();
+        foreach($films->actors as $actor){
+            die($actor);
+        }
+        
 
     }
 }

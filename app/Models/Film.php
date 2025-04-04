@@ -44,4 +44,9 @@ class Film extends Model
     ];
 
     public $timestamps = true;
+
+    public function actors(){
+        return $this->belongsToMany(Actor::class);
+    }
 }
+
