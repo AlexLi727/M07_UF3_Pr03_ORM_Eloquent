@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
+use App\Models\Film;
 
 class FilmController extends Controller
 {
@@ -31,8 +32,7 @@ class FilmController extends Controller
     }
 
     public static function readFilmsDatabase(){
-        $films = DB::table("films")->get();
-        return $films;
+        return Film::get();
     }
     /**
      * List films older than input year 
@@ -150,7 +150,7 @@ class FilmController extends Controller
     }
 
     public function countFilms(){
-        $films = DB::table('films')->count();
+        $films = Film::count();
         
         return view('films.count',["contador"=>$films]);
     }
@@ -189,17 +189,17 @@ class FilmController extends Controller
         }
         
         if($flag == "BBDD"){
-        DB::table("films")->insert([
-            "name" => $name,
-            "year" => $year,
-            "genre" => $genre,
-            "country" => $country,
-            "duration" => $duration,
-            "director_id" => 5,
-            "img_url" => $img_url,
-            "created_at" => now(),
-            "updated_at" => now()
-        ]);
+            Film::create([
+                "name" => $name,
+                "year" => $year,
+                "genre" => $genre,
+                "country" => $country,
+                "duration" => $duration,
+                "director_id" => 5,
+                "img_url" => $img_url,
+                "created_at" => now(),
+                "updated_at" => now()
+            ]);
     }
         return redirect()->action('App\Http\Controllers\FilmController@listFilms');
 
