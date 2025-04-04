@@ -5,24 +5,17 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
+use App\Models\Actor;
 
 class ActorController extends Controller
 {
     public static function readActors(){
-        $actors = DB::table("actors")->get();
-
-        return $actors;
+        return Actor::get();
     }
 
     public function countActors(){
-        $actors = ActorController::readActors();
-        $contador = 0;
-
-        foreach($actors as $actor){
-            $contador++;
-        }
-
-        return view("actors.count", ["contador" => $contador]);
+        $actors = Actor::count();
+        return view("actors.count", ["contador" => $actors]);
     }
 
     public function listActors(){
@@ -51,7 +44,7 @@ class ActorController extends Controller
     }
 
     public function destroy($id = null){
-        $actor = DB::table('actors')->where('id', $id)->first();
+        $actor = Actor::findOrNew($id)->delete();
         if(!$actor){
             return response()->json([
                 "action" => "delete",
@@ -59,7 +52,6 @@ class ActorController extends Controller
             ]);
         }
 
-        db::table('actors')->where("id", $id)->delete();
         return response()->json([
             "action" => "delete",
             "status" => true
