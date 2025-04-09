@@ -205,15 +205,8 @@ class FilmController extends Controller
     }
 
     public function indexFilms(){
-        // $films = FilmController::readFilmsDatabase(); 
         $film = Film::with('actors')->get();
         
-        
-        // foreach($film->actors as $actor){
-        
-            
-        // }
-        // die(json_encode($film));
         return response()->json($film);
 
     }
