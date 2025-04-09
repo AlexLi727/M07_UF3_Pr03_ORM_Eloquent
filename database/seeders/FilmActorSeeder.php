@@ -17,7 +17,7 @@ class FilmActorSeeder extends Seeder
         $faker = Factory::create();
 
         for($i = 0; $i < 10; $i++){
-            DB::table("films_actors")->insert(
+            DB::table("actor_film")->insert(
                 [
                     "film_id" => $faker->randomDigitNotZero(),
                     "actor_id" => $faker->randomDigitNotZero(),

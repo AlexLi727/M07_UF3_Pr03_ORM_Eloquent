@@ -42,4 +42,8 @@ class Actor extends Model
     ];
 
     public $timestamps = true;
+
+    public function films(){
+        return $this->belongsToMany(Film::class);
+    }
 }
