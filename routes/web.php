@@ -21,12 +21,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix'=>'api'], function(){
-    Route::delete('actors/{id}', [ActorController::class, "destroy"])->name("deleteActors");
-    Route::put('actors/{id}', [ActorController::class, "update"])->name("updateActors");
-    Route::get('films', [FilmController::class, "indexFilms"])->name("indexFilms");
-    Route::get('actors', [ActorController::class, 'indexActors'])->name('indexActors');
-});
+// Route::group(['prefix'=>'api'], function(){
+//     Route::delete('actors/{id}', [ActorController::class, "destroy"])->name("deleteActors");
+//     Route::put('actors/{id}', [ActorController::class, "update"])->name("updateActors");
+//     Route::get('films', [FilmController::class, "indexFilms"])->name("indexFilms");
+//     Route::get('actors', [ActorController::class, 'indexActors'])->name('indexActors');
+// });
 Route::middleware('year')->group(function() {
     Route::group(['prefix'=>'filmout'], function(){
         // Routes included with prefix "filmout"
