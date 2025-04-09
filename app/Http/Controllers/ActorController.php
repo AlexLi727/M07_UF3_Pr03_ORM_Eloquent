@@ -87,4 +87,10 @@ class ActorController extends Controller
             "status" => true
         ]);
     }
+
+    public function indexActors(){
+        $actor = Actor::with('films')->get();
+        
+        return response()->json($actor);
+    }
 }
